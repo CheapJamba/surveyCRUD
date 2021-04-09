@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.0.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="Bagandov" id="Create survey_question table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="survey_question"/>
+            </not>
+        </preConditions>
+        <createTable tableName="survey_question">
+            <column name="placing_order" type="INTEGER"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_id_question"/>
+            </column>
+            <column name="survey_id" type="BIGINT"/>
+            <column name="text" type="VARCHAR(120)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Bagandov" id="Create survey table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="survey"/>
+            </not>
+        </preConditions>
+        <createTable tableName="survey">
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="close_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="name" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_id_survey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Bagandov" id="survey to survey_question foreign key">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="survey_link"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="survey_id" baseTableName="survey_question" constraintName="survey_link" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="survey" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

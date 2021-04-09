@@ -1,0 +1,64 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.0.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="Bagandov" id="survey data">
+        <insert tableName="survey">
+            <column  name="name"  value="Personality"/>
+            <column  name="start_date"  value="01.01.2018"/>
+            <column  name="close_date"  value="28.02.2018"/>
+            <column  name="active"  value="false"/>
+        </insert>
+        <insert tableName="survey">
+            <column  name="name"  value="Professionalism"/>
+            <column  name="start_date"  value="01.03.2019"/>
+            <column  name="close_date"  value="30.04.2019"/>
+            <column  name="active"  value="false"/>
+        </insert>
+        <insert tableName="survey">
+            <column  name="name"  value="Family conditions"/>
+            <column  name="start_date"  value="01.09.2020"/>
+            <column  name="close_date"  value="30.10.2020"/>
+            <column  name="active"  value="false"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet author="Bagandov" id="survey_question data">
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Personality')"/>
+            <column  name="text"  value="Is glass half full or half empty?"/>
+            <column  name="placing_order"  value="1"/>
+        </insert>
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Personality')"/>
+            <column  name="text"  value="Do you like cats or dogs more?"/>
+            <column  name="placing_order"  value="2"/>
+        </insert>
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Personality')"/>
+            <column  name="text"  value="Would you like to be friends with a person whose character is simmilar to yours?"/>
+            <column  name="placing_order"  value="3"/>
+        </insert>
+
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Professionalism')"/>
+            <column  name="text"  value="What are your qualifications for this job?"/>
+            <column  name="placing_order"  value="1"/>
+        </insert>
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Professionalism')"/>
+            <column  name="text"  value="How many years of experience do you have?"/>
+            <column  name="placing_order"  value="2"/>
+        </insert>
+
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Family conditions')"/>
+            <column  name="text"  value="Are you married?"/>
+            <column  name="placing_order"  value="1"/>
+        </insert>
+        <insert tableName="survey_question">
+            <column  name="survey_id"  valueComputed="(select id from survey where name = 'Family conditions')"/>
+            <column  name="text"  value="Do any of your close family members have criminal record?"/>
+            <column  name="placing_order"  value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
