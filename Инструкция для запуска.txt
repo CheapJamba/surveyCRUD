@@ -1,0 +1,9 @@
+Для запуска приложения необходимо сперва собрать war-архив с помощью команды
+>mvn clean package spring-boot:repackage
+
+затем запустить архив с помощью команды:
+>java -jar *название архива* *параметры*
+передав при этом три параметра:
+>--spring.datasource.url=jdbc:postgresql:*url базы данных*
+>--spring.datasource.username=*имя пользователя, имеющего доступ к базе*
+>--spring.datasource.password=*пароль для этого пользователя*
