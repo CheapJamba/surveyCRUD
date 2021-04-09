@@ -1,4 +1,4 @@
-package com.bagndov.surveyCRUD;
+package com.bagandov.surveyCRUD;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
