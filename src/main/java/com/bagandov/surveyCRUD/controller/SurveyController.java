@@ -29,13 +29,6 @@ public class SurveyController {
 
         return surveyService.findOneById(targetId);
 
-//        try {
-//
-//        } catch (RuntimeException e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-//                    e.getMessage(), e);
-//        }
-
     }
 
     @PostMapping

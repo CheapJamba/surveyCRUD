@@ -3,6 +3,8 @@ package com.bagandov.surveyCRUD.service;
 import com.bagandov.surveyCRUD.db.infrastructure.FilterDTO;
 import com.bagandov.surveyCRUD.db.infrastructure.SortDTO;
 import com.bagandov.surveyCRUD.db.infrastructure.SortFilterDTO;
+import com.bagandov.surveyCRUD.exception.EntryNotFoundException;
+import com.bagandov.surveyCRUD.exception.WrongRequestException;
 import com.bagandov.surveyCRUD.model.survey.Survey;
 import com.bagandov.surveyCRUD.model.survey.specification.SurveySpecifications;
 import com.bagandov.surveyCRUD.repository.SurveyRepository;
@@ -31,7 +33,7 @@ public class SurveyServiceImpl implements SurveyService {
         FilterDTO filterDTO = sortFilterDTO.getFilterDTO();
 
         if(sortDTO == null) {
-            throw new RuntimeException("It is mandatory to specify sorting");
+            throw new WrongRequestException("It is mandatory to specify sorting");
         }
 
         Specification<Survey> spec = SurveySpecifications.fromFilterDTO(filterDTO);
@@ -50,7 +52,7 @@ public class SurveyServiceImpl implements SurveyService {
         if(surveyOptional.isPresent()) {
             return surveyOptional.get();
         } else {
-            throw new RuntimeException("Couldn't find survey with id: " + targetId);
+            throw new EntryNotFoundException("Couldn't find survey with id: " + targetId);
         }
     }
 

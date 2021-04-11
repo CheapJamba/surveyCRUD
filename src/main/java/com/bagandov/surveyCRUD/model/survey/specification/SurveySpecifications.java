@@ -1,6 +1,7 @@
 package com.bagandov.surveyCRUD.model.survey.specification;
 
 import com.bagandov.surveyCRUD.db.infrastructure.FilterDTO;
+import com.bagandov.surveyCRUD.exception.WrongRequestException;
 import com.bagandov.surveyCRUD.model.survey.Survey;
 import com.bagandov.surveyCRUD.model.survey.Survey_;
 import org.springframework.data.jpa.domain.Specification;
@@ -53,7 +54,7 @@ public class SurveySpecifications {
                                new SimpleDateFormat("dd.MM.yyyy").parse(filterDTO.getValue())
                        );
                    } catch (ParseException e) {
-                       throw new RuntimeException("Error parsing date", e);
+                       throw new WrongRequestException("Error parsing date", e);
                    }
                case BOOLEAN:
                    return isActive(Boolean.parseBoolean(filterDTO.getValue()));
